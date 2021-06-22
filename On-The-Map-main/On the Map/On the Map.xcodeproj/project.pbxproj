@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BE47CBCA268104C600710194 /* AddAnnotationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE47CBC9268104C600710194 /* AddAnnotationModel.swift */; };
 		BE542EE52672C06100617910 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE542EE42672C06100617910 /* AppDelegate.swift */; };
 		BE542EE72672C06100617910 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE542EE62672C06100617910 /* SceneDelegate.swift */; };
 		BE542EE92672C06100617910 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE542EE82672C06100617910 /* LoginViewController.swift */; };
@@ -33,6 +34,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		BE47CBC9268104C600710194 /* AddAnnotationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAnnotationModel.swift; sourceTree = "<group>"; };
 		BE542EE12672C06100617910 /* On the Map.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "On the Map.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE542EE42672C06100617910 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BE542EE62672C06100617910 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -154,6 +156,7 @@
 				BE542F012672C3AE00617910 /* StudentLocation.swift */,
 				BE542F0B2673CA9F00617910 /*  LoginRequest.swift */,
 				BEAC3D1C267E46CA00B8D4D3 /* AnnotationModel.swift */,
+				BE47CBC9268104C600710194 /* AddAnnotationModel.swift */,
 			);
 			path = Request;
 			sourceTree = "<group>";
@@ -245,6 +248,7 @@
 				BE542F062673B9C400617910 /* PostStudentLocationResponse.swift in Sources */,
 				BECEF4CB2677EE7400E0A1B4 /* FindAndAddLocationtoTheMap.swift in Sources */,
 				BE542F0E2674135800617910 /* ErrorResponse.swift in Sources */,
+				BE47CBCA268104C600710194 /* AddAnnotationModel.swift in Sources */,
 				BEF8004C26755BDE000F3945 /* MapTableViewController.swift in Sources */,
 				BE542F0C2673CA9F00617910 /*  LoginRequest.swift in Sources */,
 				BE542EE72672C06100617910 /* SceneDelegate.swift in Sources */,

@@ -11,8 +11,8 @@ class Client{
         static var uniqueKey = ""
         static var sessionId = ""
         static var objectId = ""
-        static var firstName = "On"
-        static var lastName = "The Map"
+        static var firstName = ""
+        static var lastName = ""
     }
 
     
@@ -84,7 +84,7 @@ class Client{
         task.resume()
     }
     
-    class func getStudentLocation(completionHandler: @escaping ([StudentLocation]?, Error?) -> Void){
+    class func getStudentLocation(completionHandler: @escaping ([StudentLocation], Error?) -> Void){
         taskForGetRequest(url: URL(string: "https://onthemap-api.udacity.com/v1/StudentLocation?limit=100&order=-updatedAt")!, response: StudenLocationFinal.self) { response, error in
             if let response = response{
                 DispatchQueue.main.async {
@@ -167,7 +167,7 @@ class Client{
                 DispatchQueue.main.async {
                     completionHandler(true, nil)
                 }
-                print(Auth.firstName + Auth.lastName)
+                print(response)
             }else{
                 DispatchQueue.main.async {
                     completionHandler(false, error)

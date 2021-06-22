@@ -16,12 +16,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="username" textAlignment="natural" minimumFontSize="17" background="1" translatesAutoresizingMaskIntoConstraints="NO" id="337-qf-q49">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="username" textAlignment="natural" minimumFontSize="17" background="1" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="337-qf-q49">
                                 <rect key="frame" x="20" y="423" width="374" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="password" textAlignment="natural" minimumFontSize="17" background="1" translatesAutoresizingMaskIntoConstraints="NO" id="7mZ-RE-HVI">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="password" textAlignment="natural" minimumFontSize="17" background="1" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="7mZ-RE-HVI">
                                 <rect key="frame" x="20" y="494" width="374" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES" secureTextEntry="YES"/>
@@ -39,7 +39,6 @@
                                 </state>
                                 <connections>
                                     <action selector="loginButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="HEW-Dj-53p"/>
-                                    <segue destination="W2w-Tn-KBv" kind="presentation" identifier="loginSegue" modalPresentationStyle="fullScreen" modalTransitionStyle="crossDissolve" id="7Rk-JX-iSp"/>
                                 </connections>
                             </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Udacity Logo" translatesAutoresizingMaskIntoConstraints="NO" id="moZ-UG-ULX">
@@ -79,6 +78,7 @@
                         <outlet property="loginButton" destination="hlA-Dg-xoG" id="wGR-by-Z9h"/>
                         <outlet property="passwordTextField" destination="7mZ-RE-HVI" id="Ly4-Bz-DxI"/>
                         <outlet property="usernameTextField" destination="337-qf-q49" id="IAa-8C-UfC"/>
+                        <segue destination="W2w-Tn-KBv" kind="presentation" identifier="loginSegue" modalPresentationStyle="fullScreen" id="glj-8t-5H1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -142,6 +142,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="f0D-H1-q2l">
+                        <nil key="title"/>
                         <barButtonItem key="leftBarButtonItem" title="Item" image="arrowshape.turn.up.left.fill" catalog="system" id="r5t-89-aLj">
                             <connections>
                                 <action selector="logoutButtonTapped:" destination="MaM-tb-3xE" id="fJW-Yi-3Dl"/>
@@ -208,11 +209,15 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="GbQ-jm-ytt">
+                        <nil key="title"/>
                         <barButtonItem key="leftBarButtonItem" title="Item" style="plain" id="eL0-7H-QoF">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Jn7-L0-epd">
                                 <rect key="frame" x="20" y="11" width="21.666666666666671" height="22"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="arrowshape.turn.up.left.fill" catalog="system"/>
+                                <connections>
+                                    <action selector="logout" destination="ehJ-Bt-hX6" eventType="touchUpInside" id="HjL-y5-SjM"/>
+                                </connections>
                             </button>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" style="plain" id="o4F-Iq-KhN">
@@ -227,7 +232,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="logoutButton" destination="Jn7-L0-epd" id="Ysb-Ac-sfz"/>
+                        <outlet property="logoutButton" destination="Jn7-L0-epd" id="GvS-kn-QC6"/>
                         <outlet property="tableViewOutlet" destination="bkU-yT-giM" id="5FB-X4-5st"/>
                     </connections>
                 </tableViewController>
@@ -262,12 +267,12 @@
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="ARt-o9-o9B">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                             </mapView>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="address" textAlignment="natural" minimumFontSize="17" background="3" translatesAutoresizingMaskIntoConstraints="NO" id="mEl-dW-iKT">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="address" textAlignment="natural" minimumFontSize="17" background="3" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="mEl-dW-iKT">
                                 <rect key="frame" x="20" y="322" width="374" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="link" textAlignment="natural" minimumFontSize="17" background="3" translatesAutoresizingMaskIntoConstraints="NO" id="PoT-w1-Nxi">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="link" textAlignment="natural" minimumFontSize="17" background="3" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="PoT-w1-Nxi">
                                 <rect key="frame" x="20" y="412" width="374" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>

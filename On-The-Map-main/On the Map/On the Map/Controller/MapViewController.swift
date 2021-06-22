@@ -21,15 +21,16 @@ class MapViewController: UIViewController{
     
     @IBOutlet weak var logoutButton: UIBarButtonItem!
     @IBOutlet weak var mapView: MKMapView!
-    
+    var studentLocation: [StudentLocation] = []
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         addAnnotation()
         reloadInputViews()
-        print(mapView)
+        print(mapView!)
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        mapView.delegate = self
     }
     
     @IBAction func logoutButtonTapped(_ sender: Any) {
@@ -38,50 +39,18 @@ class MapViewController: UIViewController{
             DispatchQueue.main.async {
                 self.dismiss(animated: true, completion: nil)
             }
-               
-            
-    
-        }
-    }
-    func getPin(completionHandler: @escaping ([StudentLocation], Error?) -> Void){
-        let session = URLSession.shared.dataTask(with: URL(string: "https://onthemap-api.udacity.com/v1/StudentLocation")!) { data, response, error in
-            guard let data = data else{
-                DispatchQueue.main.async {
-                    completionHandler([], error)
-                }
-                return
-            }
-            let decoder = JSONDecoder()
-            do{
-                print(String(data: data, encoding: .utf8 ) ?? "")
-                let request = try decoder.decode(StudenLocationFinal.self, from: data)
-                DispatchQueue.main.async {
-                    completionHandler(request.results, nil)
-                }
-            }catch{
-                DispatchQueue.main.async {
-                    completionHandler([], error)
-                    print(error.localizedDescription)
-                }
-            }
         }
     }
     
     func addAnnotation(){
         Client.getStudentLocation { data, error in
-            guard let data = data else{
-                print("error")
-                return
-            }
-            AnnotationModel.data = data
-            if (AnnotationModel.data.count <= 0){
-                self.showError(error: "Was not able to load the Studen Pins")
-            }
-            for dictionary in AnnotationModel.data{
+            self.studentLocation = data
+            
+            for dictionary in self.studentLocation{
            
                       let annotation = MKPointAnnotation()
-                annotation.title = (dictionary.firstName == nil ? "" : "\(dictionary.firstName) ") + (dictionary.lastName == nil ? "" : "\(dictionary.lastName) ")
-                 annotation.subtitle = dictionary.mediaURL
+                annotation.title = "\(dictionary.firstName)" + "" + "\(dictionary.lastName)"
+                annotation.subtitle = dictionary.mediaURL
            
                 annotation.coordinate = CLLocationCoordinate2DMake(dictionary.latitude, dictionary.longitude)
            

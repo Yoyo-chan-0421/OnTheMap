@@ -17,5 +17,18 @@ struct StudentLocation: Codable {
     var createdAt: String
     var updatedAt: String
     var mediaURL: String
+    
+    init(firstName: String, lastName: String, mapString: String, uniqueKey: String, objectId: String, latitude: Double, longitude: Double, createdAt: String, updatedAt: String, mediaURL: String){
+        self.firstName = firstName
+        self.lastName = lastName
+        self.mapString = mapString
+        self.uniqueKey = uniqueKey
+        self.objectId = objectId
+        self.latitude = latitude
+        self.longitude = longitude
+        self.createdAt = createdAt
+        self.updatedAt = updatedAt
+        self.mediaURL = mediaURL
+    }
 }
 

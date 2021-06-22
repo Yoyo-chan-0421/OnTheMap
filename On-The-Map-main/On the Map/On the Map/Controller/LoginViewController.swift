@@ -18,29 +18,37 @@ class LoginViewController: UIViewController {
         usernameTextField.text = ""
         passwordTextField.text = ""
         activityIndicator.isHidden = true
-        self.view.backgroundColor = UIColor(patternImage: UIImage(named: "5")!)
         usernameTextField.delegate = self
         passwordTextField.delegate = self
+        usernameTextField.resignFirstResponder()
+        passwordTextField.resignFirstResponder()
+        self.view.backgroundColor = UIColor(patternImage: UIImage(named: "5")!)
+        activityIndicator.hidesWhenStopped = true
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        usernameTextField.text = ""
+        passwordTextField.text = ""
     }
    
     @IBAction func loginButtonTapped(_ sender: Any) {
         setLogging(true)
-        
-        activityIndicator.isHidden = false
         Client.postSession(username: usernameTextField.text ?? "", password: passwordTextField.text ?? "",completionHandler: handleLoginRequest(success:error:))
     }
     
+    
     func handleLoginRequest(success: Bool, error: Error?){
-            setLogging(false)
-        if success{
-           
-                print(Client.Auth.sessionId)
-                print("successfuly login")
+        if !success{
+            showLoginFailure(message: error?.localizedDescription ?? "")
+        }else{
+            print(Client.Auth.sessionId)
+            print("Login Success")
             self.performSegue(withIdentifier: "loginSegue", sender: nil)
-            }else{
-                showLoginFailure(message: error?.localizedDescription ?? "")
-            }
         }
+        setLogging(false)
+        }
+    
+   
     
 
 

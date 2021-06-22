@@ -10,6 +10,7 @@ import UIKit
 class MapTableViewController: UITableViewController {
     @IBOutlet weak var logoutButton: UIButton!
     @IBOutlet weak var tableViewOutlet: UITableView!
+    
     var cellReuse = "reuseCell"
     var studentLocation = [StudentLocation]()
     override func viewDidLoad() {
@@ -18,7 +19,7 @@ class MapTableViewController: UITableViewController {
         tableViewOutlet.dataSource = self
         Client.getStudentLocation(completionHandler: { (StudentData, error)
         in
-            self.studentLocation = StudentData!
+            self.studentLocation = StudentData
             self.tableViewOutlet.reloadData()
         })
     }
@@ -44,7 +45,7 @@ class MapTableViewController: UITableViewController {
         return cell
         
     }
-    func logout(){
+    @IBAction func logout(){
         Client.logout{
             print("successfully logout")
             DispatchQueue.main.async {
@@ -52,4 +53,6 @@ class MapTableViewController: UITableViewController {
             }
         }
     }
+  
+
 }

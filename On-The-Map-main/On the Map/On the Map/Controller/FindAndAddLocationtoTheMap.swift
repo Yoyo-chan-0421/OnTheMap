@@ -16,7 +16,7 @@ class FindAndAddLocationToTheMap: UIViewController{
     @IBOutlet weak var linkTextField: UITextField!
     @IBOutlet weak var findLocationButton: UIButton!
     @IBOutlet weak var image: UIImageView!
-    let student = [PublicUserDataResponse]()
+    var studentLocation: [StudentLocation] = []
     //MARK: The coordinates
    
     // MARK: Override
@@ -25,6 +25,11 @@ class FindAndAddLocationToTheMap: UIViewController{
         self.addressTextField.text = ""
         self.linkTextField.text = ""
         hide(hide: true)
+        mapView.delegate = self
+        addressTextField.delegate = self
+        linkTextField.delegate = self
+        addressTextField.resignFirstResponder()
+        linkTextField.resignFirstResponder()
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
@@ -37,73 +42,74 @@ class FindAndAddLocationToTheMap: UIViewController{
             self.dismiss(animated: true, completion: nil)
         }
     @IBAction func addPinButtonTapped(){
-        Client.postStudentLocation(mapString: addressTextField.text ?? "", mediaURL: linkTextField.text ?? "", completionHandler: handlePostStudentRequest(success:error:))
+        
+         Client.postStudentLocation(mapString: addressTextField.text ?? "", mediaURL: linkTextField.text ?? "", completionHandler: handlePostStudentRequest(success:error:))
         self.dismiss(animated: true, completion: nil)
+        print("working?")
+        
     }
     @IBAction func findeLocationButtonTapped(){
         hide(hide: false)
-        if self.addressTextField.text == "" {
-            showError(error: "You have to enter a location")
-            findLocationButton.isEnabled = true
-            return
+        if addressTextField.text == ""{
+            showError(error: "Please input an address")
         }
-        if self.linkTextField.text == ""{
-            findLocationButton.isEnabled = true
-            showError(error: "The url text field cannot be blank")
+        if linkTextField.text == ""{
+            showError(error: "Please input a link")
         }
-        if FindAndAddLocationToTheMap.isTheAddressCorrect(address: self.addressTextField.text ?? "", completion: handlefindLocation(success:error:)){
+        if FindAndAddLocationToTheMap.isTheAddressCorrect(address: addressTextField.text ?? "", completionHandler: handlefindLocation(success:error:)){
             addressTextField.isHidden = true
             linkTextField.isHidden = true
         }
         addAnnotation()
+        print("hello?")
     }
     //MARK: Handle
     func handlePostStudentRequest(success: Bool, error: Error?){
         if success{
-            print("success")
+            print("success Posting")
         }else{
             showError(error: "Please Retry")
         }
     }
     func handlefindLocation(success: Bool, error: Error?){
         if success{
+            hide(hide: false)
             print("Found Location")
             print(LatAndLong.lat)
             print(LatAndLong.long)
             zoomIn()
         }else{
+            hide(hide: true)
             showError(error: "Please input a correct location")
+            
         }
     }
-    
-    
     //MARK: Check if the location is correct
-    class func isTheAddressCorrect(address:String,completion:@escaping  (Bool,Error?) -> Void) -> Bool
+    class func isTheAddressCorrect(address:String,completionHandler:@escaping  (Bool,Error?) -> Void) -> Bool
     {
-        
-            var isValidated = false
-            let locationManager = CLGeocoder()
-            locationManager.geocodeAddressString(address, completionHandler:
+        print("checking address?")
+        var isValidated = false
+        let locationManager = CLGeocoder()
+        locationManager.geocodeAddressString(address, completionHandler:
+        {
+            (placemarks: [CLPlacemark]?, error: Error?) -> Void in
+            if let placemark = placemarks?[0]
             {
-                (placemarks: [CLPlacemark]?, error: Error?) -> Void in
-                if let placemark = placemarks?[0]
-                {
-                    LatAndLong.lat = placemark.location!.coordinate.latitude
-                    LatAndLong.long = placemark.location!.coordinate.longitude
-                    completion(true, error)
-                    isValidated = true
-                }
-                else
-                {
-                    completion(false,error)
-                }
+                LatAndLong.lat = placemark.location!.coordinate.latitude
+                LatAndLong.long = placemark.location!.coordinate.longitude
+                completionHandler(true, error)
+                isValidated = true
             }
-        )
-        
-        return isValidated
+            else
+            {
+                completionHandler(false,error)
+            }
+        }
+    )
+    
+    return isValidated
     }
         override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-       
     }
     
     //MARK: Shows the error
@@ -126,18 +132,20 @@ class FindAndAddLocationToTheMap: UIViewController{
     
     func addAnnotation(){
         Client.postStudentLocation(mapString: addressTextField.text ?? "", mediaURL: linkTextField.text ?? "", completionHandler: handlePostStudentRequest(success:error:))
-        
-        for dictionary in AnnotationModel.data{
+        Client.getStudentLocation { data, error in
+            self.studentLocation = data
+            for dictionary in self.studentLocation{
        
                   let annotation = MKPointAnnotation()
-            annotation.title = (Client.Auth.firstName == nil ? "" : "\(Client.Auth.firstName) ") + (Client.Auth.lastName == nil ? "" : "\(Client.Auth.lastName) ")
-            annotation.subtitle = linkTextField.text
+                annotation.title = "\(dictionary.firstName)" + "\(dictionary.lastName)"
+            annotation.subtitle = self.linkTextField.text
        
-            annotation.coordinate = CLLocationCoordinate2DMake(LatAndLong.lat, LatAndLong.long)
+                annotation.coordinate = CLLocationCoordinate2DMake(dictionary.latitude, dictionary.longitude)
        
             self.mapView.addAnnotation(annotation)
         }
         self.mapView.showAnnotations(self.mapView.annotations, animated: true)
+        }
     }
     
     func hide(hide: Bool){
@@ -192,4 +200,14 @@ extension FindAndAddLocationToTheMap: MKMapViewDelegate{
             }
         }
     }
+}
+
+extension FindAndAddLocationToTheMap: UITextFieldDelegate{
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        addressTextField.resignFirstResponder()
+        linkTextField.resignFirstResponder()
+        return true
+    }
+    
+    
 }
