@@ -34,23 +34,23 @@
                                     <constraint firstAttribute="width" constant="196" id="hlF-Z1-0Cn"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                <state key="normal" title="Login" backgroundImage="1">
+                                <state key="normal" title="Login" backgroundImage="background_1-1">
                                     <color key="titleColor" systemColor="labelColor"/>
                                 </state>
                                 <connections>
                                     <action selector="loginButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="HEW-Dj-53p"/>
                                 </connections>
                             </button>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Udacity Logo" translatesAutoresizingMaskIntoConstraints="NO" id="moZ-UG-ULX">
-                                <rect key="frame" x="79" y="87" width="256" height="266"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="256" id="A9z-nq-ao7"/>
-                                    <constraint firstAttribute="height" constant="266" id="gDG-yX-nhd"/>
-                                </constraints>
-                            </imageView>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="LOi-xZ-phh">
                                 <rect key="frame" x="197" y="654" width="20" height="20"/>
                             </activityIndicatorView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Udacity Logo" translatesAutoresizingMaskIntoConstraints="NO" id="moZ-UG-ULX">
+                                <rect key="frame" x="103" y="112" width="208" height="206"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="208" id="oqW-Fh-XPG"/>
+                                    <constraint firstAttribute="height" constant="206" id="wxt-9M-1cj"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -58,19 +58,19 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="LOi-xZ-phh" secondAttribute="bottom" constant="188" id="27I-QU-68d"/>
                             <constraint firstItem="hlA-Dg-xoG" firstAttribute="top" secondItem="7mZ-RE-HVI" secondAttribute="bottom" constant="49" id="9fB-gA-Iha"/>
                             <constraint firstItem="7mZ-RE-HVI" firstAttribute="top" secondItem="337-qf-q49" secondAttribute="bottom" constant="37" id="AQu-15-j2k"/>
-                            <constraint firstItem="moZ-UG-ULX" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="43" id="Bnl-Lh-PHP"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="337-qf-q49" secondAttribute="trailing" constant="20" id="DkK-Lq-dsE"/>
-                            <constraint firstItem="moZ-UG-ULX" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="79" id="KuH-QK-zUG"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="moZ-UG-ULX" secondAttribute="trailing" constant="79" id="OQM-6H-pVW"/>
                             <constraint firstItem="7mZ-RE-HVI" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="ScS-CS-Uyl"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="moZ-UG-ULX" secondAttribute="trailing" constant="103" id="Vn8-eZ-1hN"/>
                             <constraint firstItem="LOi-xZ-phh" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="197" id="Wy6-ap-MES"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="7mZ-RE-HVI" secondAttribute="trailing" constant="20" id="XfH-mc-sHe"/>
                             <constraint firstItem="337-qf-q49" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="jGO-EO-dZ3"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="LOi-xZ-phh" secondAttribute="trailing" constant="197" id="kwf-Ev-DWq"/>
+                            <constraint firstItem="moZ-UG-ULX" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="103" id="mIF-U0-eiY"/>
                             <constraint firstItem="LOi-xZ-phh" firstAttribute="top" secondItem="hlA-Dg-xoG" secondAttribute="bottom" constant="18" id="pCa-kL-luF"/>
                             <constraint firstItem="hlA-Dg-xoG" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="109" id="pIc-Rf-Yko"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="hlA-Dg-xoG" secondAttribute="trailing" constant="109" id="pye-vn-gze"/>
-                            <constraint firstItem="337-qf-q49" firstAttribute="top" secondItem="moZ-UG-ULX" secondAttribute="bottom" constant="70" id="v8d-wW-S3f"/>
+                            <constraint firstItem="moZ-UG-ULX" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="68" id="rIW-U8-xMm"/>
+                            <constraint firstItem="337-qf-q49" firstAttribute="top" secondItem="moZ-UG-ULX" secondAttribute="bottom" constant="105" id="u3J-t2-cDW"/>
                         </constraints>
                     </view>
                     <connections>
@@ -362,7 +362,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="Ay0-Lb-bc5"/>
+        <segue reference="AFg-lP-Khe"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="1" width="1000" height="1000"/>
@@ -370,6 +370,7 @@
         <image name="Udacity Logo" width="62" height="62"/>
         <image name="arrowshape.turn.up.left.fill" catalog="system" width="128" height="106"/>
         <image name="background_1" width="640" height="1136"/>
+        <image name="background_1-1" width="640" height="1136"/>
         <image name="background_2" width="640" height="1136"/>
         <image name="icon_world" width="52" height="67"/>
         <image name="list.star" catalog="system" width="128" height="94"/>

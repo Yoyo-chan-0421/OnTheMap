@@ -22,7 +22,7 @@ class LoginViewController: UIViewController {
         passwordTextField.delegate = self
         usernameTextField.resignFirstResponder()
         passwordTextField.resignFirstResponder()
-        self.view.backgroundColor = UIColor(patternImage: UIImage(named: "5")!)
+        self.view.backgroundColor = UIColor(patternImage: UIImage(named: "1")!)
         activityIndicator.hidesWhenStopped = true
     }
     override func viewWillAppear(_ animated: Bool) {

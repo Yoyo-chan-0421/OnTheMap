@@ -127,26 +127,19 @@ class FindAndAddLocationToTheMap: UIViewController{
         let span = MKCoordinateSpan (latitudeDelta: latitude, longitudeDelta: longitude)
         let location = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
         let region = MKCoordinateRegion (center: location, span: span)
-        
     }
     
     func addAnnotation(){
-        Client.postStudentLocation(mapString: addressTextField.text ?? "", mediaURL: linkTextField.text ?? "", completionHandler: handlePostStudentRequest(success:error:))
-        Client.getStudentLocation { data, error in
-            self.studentLocation = data
-            for dictionary in self.studentLocation{
-       
-                  let annotation = MKPointAnnotation()
-                annotation.title = "\(dictionary.firstName)" + "\(dictionary.lastName)"
-            annotation.subtitle = self.linkTextField.text
-       
-                annotation.coordinate = CLLocationCoordinate2DMake(dictionary.latitude, dictionary.longitude)
-       
-            self.mapView.addAnnotation(annotation)
-        }
+        let annotation = MKPointAnnotation()
+        annotation.title = self.addressTextField.text
+        annotation.subtitle = self.linkTextField.text
+        annotation.coordinate = CLLocationCoordinate2DMake(LatAndLong.lat, LatAndLong.long)
+        self.mapView.setCenter(annotation.coordinate, animated: true)
+        self.mapView.addAnnotation(annotation)
         self.mapView.showAnnotations(self.mapView.annotations, animated: true)
+        zoomIn()
         }
-    }
+    
     
     func hide(hide: Bool){
         if hide == false{
@@ -164,7 +157,7 @@ class FindAndAddLocationToTheMap: UIViewController{
             image.isHidden = false
             mapView.isHidden = true
             addPinButton.isHidden = true
-            self.view.backgroundColor = UIColor(patternImage: UIImage(named: "5")!)
+            self.view.backgroundColor = UIColor(patternImage: UIImage(named: "2")!)
         }
     }
 }
@@ -194,7 +187,7 @@ extension FindAndAddLocationToTheMap: MKMapViewDelegate{
     // to the URL specified in the annotationViews subtitle property.
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         if control == view.rightCalloutAccessoryView {
-            let app = UIApplication.shared
+            _ = UIApplication.shared
             if let toOpen = view.annotation?.subtitle! {
                 UIApplication.shared.open(URL(string: toOpen)!, options: [:], completionHandler: nil)
             }
