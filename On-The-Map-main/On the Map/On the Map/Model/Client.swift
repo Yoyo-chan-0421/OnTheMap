@@ -98,8 +98,8 @@ class Client{
         }
     }
     
-    class func postStudentLocation(mapString: String, mediaURL: String, completionHandler: @escaping (Bool, Error?) -> Void){
-        let body = PostStudentLocation(uniqueKey: Auth.uniqueKey, firstName: Auth.firstName, lastName: Auth.lastName, mapString: mapString, mediaURL: mediaURL, latitude: LatAndLong.lat, longitude: LatAndLong.long)
+    class func postStudentLocation(firstName: String, lastName: String, mapString: String, mediaURL: String, completionHandler: @escaping (Bool, Error?) -> Void){
+        let body = PostStudentLocation(uniqueKey: Auth.uniqueKey, firstName: firstName, lastName: lastName, mapString: mapString, mediaURL: mediaURL, latitude: LatAndLong.lat, longitude: LatAndLong.long)
         taskForPostRequest(url: URL(string: "https://onthemap-api.udacity.com/v1/StudentLocation")!, response: PostStudentLocationResponse.self, body: body) { response, error in
             if let response = response{
                 print(response.createdAt)
@@ -158,19 +158,19 @@ class Client{
         task.resume()
     }
     
-    class func getPublicData(completionHandler: @escaping (Bool, Error?) -> Void){
+    class func getPublicData(completionHandler: @escaping (String?, String?, Error?) -> Void){
         taskForGetRequest(url: URL(string: "https://onthemap-api.udacity.com/v1/users/\(Auth.objectId)")!, response: PublicUserDataResponse.self ) { response, error in
             if let response = response{
                 Auth.firstName = response.firstName
                 Auth.lastName = response.lastName
                 Auth.uniqueKey = response.key
                 DispatchQueue.main.async {
-                    completionHandler(true, nil)
+                    completionHandler(response.firstName,response.lastName, nil)
                 }
                 print(response)
             }else{
                 DispatchQueue.main.async {
-                    completionHandler(false, error)
+                    completionHandler(nil, nil, error)
                 }
             }
         }

@@ -43,10 +43,10 @@ class FindAndAddLocationToTheMap: UIViewController{
         }
     @IBAction func addPinButtonTapped(){
         
-         Client.postStudentLocation(mapString: addressTextField.text ?? "", mediaURL: linkTextField.text ?? "", completionHandler: handlePostStudentRequest(success:error:))
         self.dismiss(animated: true, completion: nil)
         print("working?")
-        
+        Client.getPublicData(completionHandler: handleUserData(firstName:lastName:error:))
+       
     }
     @IBAction func findeLocationButtonTapped(){
         hide(hide: false)
@@ -64,6 +64,13 @@ class FindAndAddLocationToTheMap: UIViewController{
         print("hello?")
     }
     //MARK: Handle
+    func handleUserData(firstName: String?, lastName: String?, error: Error?){
+        if error == nil{
+            Client.postStudentLocation(firstName: firstName ?? "", lastName: lastName ?? "", mapString: addressTextField.text ?? "", mediaURL: linkTextField.text ?? "", completionHandler: handlePostStudentRequest(success:error:))
+        }else{
+            print("cannot post")
+        }
+    }
     func handlePostStudentRequest(success: Bool, error: Error?){
         if success{
             print("success Posting")
@@ -71,6 +78,8 @@ class FindAndAddLocationToTheMap: UIViewController{
             showError(error: "Please Retry")
         }
     }
+    
+    
     func handlefindLocation(success: Bool, error: Error?){
         if success{
             hide(hide: false)
